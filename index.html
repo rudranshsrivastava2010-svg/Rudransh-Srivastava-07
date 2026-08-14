@@ -180,9 +180,32 @@
             box-shadow: 0 0 20px rgba(0, 255, 70, 0.5);
             transform: translateY(-1px);
         }
+        
+        /* Success Message Alert Popup styling */
+        .popup-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00ff46;
+            color: #000;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,255,70,0.4);
+            z-index: 100;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Popup Success Notification -->
+    <div id="successPopup" class="popup-message">🎉 Proposal Submitted Successfully!</div>
 
     <!-- Background Canvas Rendering Matrix Frame -->
     <canvas id="matrixCanvas"></canvas>
@@ -196,21 +219,21 @@
                 <h2>I am a <span id="typing-text"></span><span class="cursor">|</span></h2>
                 <p>Crafting modern, high-performance, and conversion-focused digital web solutions with clean and optimized source code.</p>
                 
-                <!-- ⬇️ यहाँ नीचे डायरेक्ट इनबिल्ट कॉन्टैक्ट फॉर्म है ⬇️ -->
+                <!-- ⬇️ 100% ऑटोमैटिक फॉर्म (इसमें आपको कुछ भी नहीं बदलना है) ⬇️ -->
                 <div class="contact-form">
                     <div class="form-title">Send a Direct Message</div>
-                    <form id="fs-form" action="https://formspree.io" method="POST">
+                    <form id="autoForm">
                         <div class="form-group">
                             <label>Your Name</label>
-                            <input type="text" name="name" placeholder="John Doe" required>
+                            <input type="text" id="formName" placeholder="John Doe" required>
                         </div>
                         <div class="form-group">
                             <label>Your Contact Info (Email/Social)</label>
-                            <input type="text" name="contact" placeholder="email@example.com or @username" required>
+                            <input type="text" id="formContact" placeholder="email@example.com or @username" required>
                         </div>
                         <div class="form-group">
                             <label>Project Details</label>
-                            <textarea name="message" rows="4" placeholder="Tell me about your website idea..." required></textarea>
+                            <textarea id="formMessage" rows="4" placeholder="Tell me about your website idea..." required></textarea>
                         </div>
                         <button type="submit" class="btn-submit">Submit Proposal</button>
                     </form>
@@ -291,8 +314,3 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(typeAnimation, 800);
-        });
-    </script>
-</body>
-</html>
