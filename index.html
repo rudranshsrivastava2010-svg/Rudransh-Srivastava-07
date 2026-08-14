@@ -3,293 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rudransh Srivastava | Cyber Security Expert</title>
-    
-    <!-- CSS Styles -->
+    <title>Rudransh Srivastava | Cyber Architect</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace; /* शुद्ध हैकर फ़ॉन्ट */
+            font-family: 'Courier New', Courier, monospace;
         }
 
         body {
-            background: #020617;
-            color: #00ff46; /* नियॉन ग्रीन कलर */
-            overflow-x: hidden;
+            background-color: #050b14;
+            color: #00ff46;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
         }
 
-        /* Matrix Rain Background Layer */
-        #matrixCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.25; /* बैकग्राउंड बारिश को हल्का रखा है ताकि टेक्स्ट साफ़ दिखे */
-        }
-
-        /* Main Grid Layout Wrapper */
-        .page-wrapper {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        /* Hacker Glass Card Dashboard */
-        .glass-box {
-            background: rgba(2, 6, 23, 0.85);
+        .terminal-wrapper {
+            background: rgba(2, 6, 23, 0.9);
             border: 1px solid #00ff46;
-            padding: 35px;
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 25px rgba(0, 255, 70, 0.15);
-            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 70, 0.2);
+            border-radius: 8px;
+            max-width: 700px;
+            width: 100%;
+            padding: 30px;
         }
 
-        .status-badge {
-            display: inline-block;
+        .header-panel {
+            border-bottom: 1px solid rgba(0, 255, 70, 0.3);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .status-node {
             color: #020617;
             background: #00ff46;
-            font-size: 12px;
+            padding: 2px 8px;
             font-weight: bold;
-            padding: 4px 14px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            box-shadow: 0 0 10px #00ff46;
+            font-size: 11px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
         h1 {
-            font-size: 2.3rem;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
             color: #ffffff;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
-        .highlight {
+        .neon-text {
             color: #00ff46;
-            text-shadow: 0 0 15px rgba(0, 255, 70, 0.6);
+            text-shadow: 0 0 10px rgba(0, 255, 70, 0.5);
         }
 
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            color: #38bdf8;
             margin-bottom: 20px;
-            color: #38bdf8; /* साइबर ब्लू */
         }
 
-        /* 🖥️ LIVE HACKER TERMINAL CONSOLE LOG 🖥️ */
-        .terminal-container {
-            background: #000000;
-            border: 1px solid rgba(0, 255, 70, 0.4);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: left;
-            box-shadow: inset 0 0 20px rgba(0, 255, 70, 0.2);
-            height: 250px;
+        p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .projects-section {
+            margin-top: 30px;
+            border-top: 1px solid rgba(0, 255, 70, 0.3);
+            padding-top: 20px;
+        }
+
+        .project-card {
+            background: #000;
+            border: 1px dashed rgba(0, 255, 70, 0.5);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .project-title {
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .interactive-area {
+            margin-top: 25px;
+            background: #000;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            height: 120px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* हमेशा नए लॉग्ज नीचे दिखेंगे */
-        }
-
-        .terminal-header {
-            border-bottom: 1px solid rgba(0, 255, 70, 0.2);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            font-size: 12px;
-            color: #64748b;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .terminal-body {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #00ff46;
-        }
-
-        .log-line {
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typeLog 0.2s steps(40, end);
-        }
-
-        .log-success { color: #00ff46; }
-        .log-warning { color: #fbbf24; }
-        .log-danger { color: #ef4444; text-shadow: 0 0 5px #ef4444; }
-
-        /* Quick Interactive Contact Grid */
-        .contact-form {
-            text-align: left;
-            margin-top: 20px;
-            border-top: 1px solid rgba(0, 255, 70, 0.2);
-            padding-top: 25px;
-        }
-
-        .form-title {
-            font-size: 1.1rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 600px) {
-            .form-row { grid-template-columns: 1fr; }
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 11px;
-            color: #64748b;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .form-group input, 
-        .form-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 70, 0.3);
-            border-radius: 4px;
-            color: #00ff46;
-            font-size: 13px;
-            outline: none;
-        }
-
-        .form-group input:focus, 
-        .form-group textarea:focus {
-            border-color: #00ff46;
-            box-shadow: 0 0 8px rgba(0, 255, 70, 0.3);
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: transparent;
-            color: #00ff46;
-            border: 1px solid #00ff46;
-            padding: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background: #00ff46;
-            color: #000;
-            box-shadow: 0 0 15px #00ff46;
+            justify-content: flex-end;
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Layer Canvas Frame -->
-    <canvas id="matrixCanvas"></canvas>
+    <div class="terminal-wrapper">
+        <div class="header-panel">
+            <span>SECURE GATEWAY HOST // PORT: 8080</span>
+        </div>
 
-    <div class="page-wrapper">
-        <!-- Main Admin Dashboard Box -->
-        <div class="glass-box">
-            <span class="status-badge">SYSTEM ACTIVE // SECURE</span>
-            <h1>SYSTEM ADM: <span class="highlight">RUDRANSH SRIVASTAVA</span></h1>
-            <h2>&gt;_ CORE WEB ARCHITECT &amp; SECURITY INTERACTION</h2>
+        <span class="status-node">🟢 NODE ACTIVE</span>
+        <h1>ID: <span class="neon-text">Rudransh Srivastava</span></h1>
+        <h2>&gt;_ Cyber Web Architect & Script Expert</h2>
+        
+        <p>I engineer high-performance web systems, bypass basic server limitations, and compile ultra-secure responsive frontend interfaces using modern clean code layouts.</p>
+
+        <!-- प्रोजेक्ट्स सेक्शन (जैसे आपके पुराने कोड में था) -->
+        <div class="projects-section">
+            <h3 style="margin-bottom: 15px; color: #fff;">&gt;_ Verified Repositories</h3>
             
-            <!-- 🖥️ LIVE TERMINAL LOG PANEL 🖥️ -->
-            <div class="terminal-container">
-                <div class="terminal-header">
-                    <span>STATUS: INJECTING_EXPLOIT...</span>
-                    <span>PORT: 443 // SECURE</span>
-                </div>
-                <div class="terminal-body" id="terminalLog">
-                    <!-- जावास्क्रिप्ट यहाँ लाइव हैकिंग कमांड्स प्रिंट करेगा -->
-                </div>
+            <div class="project-card">
+                <div class="project-title">[01] Exploit Matrix Overlay</div>
+                <p style="margin: 0; font-size: 13px;">Advanced interface inject system using customized JS layout elements.</p>
             </div>
 
-            <!-- Inbuilt Contact System -->
-            <div class="contact-form">
-                <div class="form-title">&gt;_ Establish Secure Node Connection (Contact)</div>
-                <form id="autoForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Identity / Name</label>
-                            <input type="text" id="formName" placeholder="root@user" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Secure Gateway (Email/Social)</label>
-                            <input type="text" id="formContact" placeholder="gateway_node" required>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 15px;">
-                        <label>Payload Data (Message)</label>
-                        <textarea id="formMessage" rows="2" placeholder="Specify exploit requirements or project ideas..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Execute Data Packet Submission</button>
-                </form>
+            <div class="project-card">
+                <div class="project-title">[02] Automated Network Firewall</div>
+                <p style="margin: 0; font-size: 13px;">Clean CSS & HTML structural nodes optimized for fast network transfers.</p>
             </div>
+        </div>
+
+        <!-- लाइव हैकर कंसोल लॉग -->
+        <div class="interactive-area" id="logConsole">
+            <div>[SYSTEM]: Initializing secure handshake...</div>
         </div>
     </div>
 
-    <!-- JavaScript Logic Control System -->
     <script>
-        // --- 1. Cyberpunk Matrix Digital Rain Effect ---
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
+        // लाइव हैकिंग क्रेडेंशियल्स प्रिंट लूप
+        const logs = [
+            "Syncing terminal to main server matrix...",
+            "Bypassing secure socket shell handshake...",
+            "Extracting structural interface nodes...",
+            "SUCCESS: Port 443 fully responsive.",
+            "Compiling dynamic visual mainframe...",
+            "Encrypted connection holding stable."
+        ];
+        
+        let index = 0;
+        const consoleTarget = document.getElementById("logConsole");
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const symbols = "01010101XYZ<>[]={}+-*$#@!#%&?";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const rainDrops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff46';
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = symbols.charAt(Math.floor(Math.random() * symbols.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.98) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
+        function startHackerPrint() {
+            if(consoleTarget.children.length > 4) {
+                consoleTarget.removeChild(consoleTarget.firstChild);
             }
+            const div = document.createElement("div");
+            div.textContent = `[ROOT@RUDRANSH]:~$ ${logs[index]}`;
+            consoleTarget.appendChild(div);
+            index = (index + 1) % logs.length;
+            setTimeout(startHackerPrint, 2000);
         }
-        setInterval(drawMatrix, 30);
-
-        // --- 🖥️ 2. Pure Hacker Live Console Logging Engine 🖥️ ---
-        const hackerLogs = [
-            { text: "Initializing kernel synchronization loop...", type: "success" },
-            { text: "Connecting to remote proxy cluster node...", type: "success" },
-            { text: "WARNING: High latency detected on firewall tunnel.", type: "warning" },
-            { text: "Injecting temporary memory extraction packets...", type: "success" },
-            { text: "Bypassing main database encrypted handshake...", type: "success" },
-            { text: "CRITICAL ALERT: Security trace attempt block #892!", type: "danger" },
-            { text: "Rerouting virtual local mainframe through VPN...", type: "success" },
-            { text: "Access Granted. Initializing system decryption keys...", type: "success" },
-            { text: "Downloading index metadata structural frames...", type: "success" },
+        setTimeout(startHackerPrint, 1000);
+    </script>
+</body>
+</html>
