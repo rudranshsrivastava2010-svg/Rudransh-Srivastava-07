@@ -4,333 +4,295 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rudransh Srivastava | Freelance Web Developer</title>
-    <!-- Links for Fonts and Icons -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
     
-    <!-- CSS Styling -->
+    <!-- CSS Styles -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #0b0f19;
-            color: #f1f5f9;
+            background: #030712;
+            color: #ffffff;
         }
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background-color: #111827;
-            position: sticky;
+        /* Matrix Canvas Background Layer */
+        #matrixCanvas {
+            position: fixed;
             top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #1f2937;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #10b981;
+        /* Main Scrollable Layout Wrapper */
+        .page-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
         }
 
-        nav a {
-            color: #9ca3af;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #10b981;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 85vh;
+        /* Content Hero Section Container */
+        .hero-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #111827 0%, #0b0f19 100%);
-            padding: 0 20px;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        .badge {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            padding: 6px 16px;
+        /* Premium Glassmorphic Card */
+        .glass-box {
+            background: rgba(3, 7, 18, 0.75);
+            border: 1px solid rgba(0, 255, 70, 0.2);
+            padding: 40px 30px;
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            display: inline-block;
-            margin-bottom: 20px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            text-align: center;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 70, 0.05);
         }
 
-        .hero h1 {
-            font-size: 52px;
+        .status-badge {
+            display: inline-block;
+            color: #00ff46;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #00ff46;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
             margin-bottom: 15px;
             font-weight: 700;
         }
 
         .highlight {
-            color: #10b981;
+            color: #00ff46;
+            text-shadow: 0 0 15px rgba(0, 255, 70, 0.4);
         }
 
-        .hero p {
-            font-size: 19px;
-            color: #9ca3af;
-            max-width: 650px;
-            margin: 0 auto 35px auto;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            display: inline-block;
-            padding: 12px 32px;
-            background-color: #10b981;
-            color: #0b0f19;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #059669;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            display: inline-block;
-            padding: 12px 32px;
-            border: 1px solid #4b5563;
-            color: #f1f5f9;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            border-color: #10b981;
-            color: #10b981;
-        }
-
-        /* Sections */
-        section {
-            padding: 100px 8%;
-            text-align: center;
-        }
-
-        section h2 {
-            font-size: 36px;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-        }
-
-        section h2::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 4px;
-            background-color: #10b981;
-            bottom: -10px;
-            left: 25%;
-            border-radius: 2px;
-        }
-
-        .about p {
-            max-width: 750px;
-            margin: 0 auto;
-            font-size: 18px;
-            line-height: 1.8;
-            color: #9ca3af;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .project-card {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: left;
-            max-width: 350px;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: #10b981;
-        }
-
-        .project-card h3 {
-            margin-bottom: 12px;
-            color: #f1f5f9;
-        }
-
-        .project-card p {
-            color: #9ca3af;
-            font-size: 15px;
+        h2 {
+            color: #e2e8f0;
+            font-size: 1.6rem;
             margin-bottom: 20px;
-            line-height: 1.5;
+            font-weight: 500;
         }
 
-        .tech-tag {
-            background-color: #1f2937;
-            color: #9ca3af;
-            padding: 4px 10px;
-            font-size: 12px;
-            border-radius: 4px;
-            margin-right: 5px;
+        #typing-text {
+            color: #38bdf8;
         }
 
-        /* Skills */
-        .skills-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+        .cursor {
+            color: #38bdf8;
+            font-weight: 300;
+            animation: blink 0.8s infinite;
         }
 
-        .skill-card {
-            background-color: #111827;
-            padding: 18px 35px;
-            border-radius: 6px;
-            font-weight: 600;
-            border: 1px solid #1f2937;
-            transition: all 0.3s;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        .skill-card i {
-            margin-right: 8px;
-            color: #10b981;
+        p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 35px;
         }
 
-        .skill-card:hover {
-            border-color: #10b981;
-            background-color: rgba(16, 185, 129, 0.02);
+        /* Interactive Contact Form Styling */
+        .contact-form {
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
         }
 
-        /* Contact & Socials */
-        .contact p {
-            color: #9ca3af;
-            margin-bottom: 30px;
-            font-size: 18px;
-        }
-
-        .contact-btn {
-            font-size: 18px;
-        }
-
-        /* Footer */
-        footer {
+        .form-title {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 20px;
             text-align: center;
-            padding: 40px;
-            background-color: #090d16;
-            color: #4b5563;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #ffffff;
             font-size: 14px;
-            border-top: 1px solid #1f2937;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #00ff46;
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 10px rgba(0, 255, 70, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #00ff46;
+            color: #000000;
+            border: none;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #00cc38;
+            box-shadow: 0 0 20px rgba(0, 255, 70, 0.5);
+            transform: translateY(-1px);
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <header>
-        <div class="logo">Rudransh.dev</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+    <!-- Background Canvas Rendering Matrix Frame -->
+    <canvas id="matrixCanvas"></canvas>
 
-    <!-- Main Hero Screen -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <span class="badge">Available for Freelance Work</span>
-            <h1>Hi, I am <span class="highlight">Rudransh Srivastava</span> 👋</h1>
-            <p>I build modern, responsive, and high-converting websites using HTML, CSS, and JavaScript.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn-primary">Hire Me Now</a>
-                <a href="#projects" class="btn-outline">View My Work</a>
+    <!-- Scrollable View Layer Wrapper -->
+    <div class="page-wrapper">
+        <section class="hero-container">
+            <div class="glass-box">
+                <span class="status-badge">🟢 Available for Freelance Work</span>
+                <h1>Hi, I am <span class="highlight">Rudransh Srivastava</span></h1>
+                <h2>I am a <span id="typing-text"></span><span class="cursor">|</span></h2>
+                <p>Crafting modern, high-performance, and conversion-focused digital web solutions with clean and optimized source code.</p>
+                
+                <!-- ⬇️ यहाँ नीचे डायरेक्ट इनबिल्ट कॉन्टैक्ट फॉर्म है ⬇️ -->
+                <div class="contact-form">
+                    <div class="form-title">Send a Direct Message</div>
+                    <form id="fs-form" action="https://formspree.io" method="POST">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Contact Info (Email/Social)</label>
+                            <input type="text" name="contact" placeholder="email@example.com or @username" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Project Details</label>
+                            <textarea name="message" rows="4" placeholder="Tell me about your website idea..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit Proposal</button>
+                    </form>
+                </div>
+                
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Me</h2>
-        <p>I am a frontend web developer passionate about turning client ideas into functional digital solutions. I deliver clean code and professional designs.</p>
-    </section>
+    <!-- JavaScript Control Loop Architecture -->
+    <script>
+        // --- 1. Cyberpunk Matrix Digital Rain Effect ---
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <h2>My Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>Landing Page Design</h3>
-                <p>A beautiful, conversion-focused landing page built for businesses to capture leads.</p>
-                <span class="tech-tag">HTML</span> <span class="tech-tag">CSS</span>
-            </div>
-            <div class="project-card">
-                <h3>Interactive Web App</h3>
-                <p>A fully functional JavaScript application with dynamic components and dark mode.</p>
-                <span class="tech-tag">JavaScript</span> <span class="tech-tag">CSS</span>
-            </div>
-        </div>
-    </section>
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-container">
-            <div class="skill-card"><i class="fab fa-html5"></i> HTML5</div>
-            <div class="skill-card"><i class="fab fa-css3-alt"></i> CSS3</div>
-            <div class="skill-card"><i class="fab fa-js"></i> JavaScript</div>
-            <div class="skill-card"><i class="fab fa-github"></i> Git & GitHub</div>
-        </div>
-    </section>
+        const symbols = "01010101XYZ<>[]={}+-*$#@!#%";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(1);
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Let's Work Together</h2>
-        <p>Have a project in mind? Let's build something amazing for your business.</p>
-        <a href="https://google.com" target="_blank" class="btn-primary contact-btn"><i class="fas fa-envelope"></i> Send Me an Email</a>
-    </section>
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(3, 7, 12, 0.06)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Rudransh Srivastava. All Rights Reserved.</p>
-    </footer>
+            ctx.fillStyle = '#00ff46';
+            ctx.font = fontSize + 'px monospace';
 
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = symbols.charAt(Math.floor(Math.random() * symbols.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 33);
+
+
+        // --- 2. Dynamic Typewriter Animation System ---
+        const roles = ["Frontend Developer.", "Freelance Web Expert.", "UI/UX Specialist.", "Clean Code Architect."];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingTarget = document.getElementById("typing-text");
+
+        function typeAnimation() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typingTarget.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingTarget.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2200; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length; 
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeAnimation, typeSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(typeAnimation, 800);
+        });
+    </script>
 </body>
 </html>
